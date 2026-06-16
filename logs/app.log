@@ -2438,3 +2438,47 @@ Caused by: java.io.EOFException
 2026-06-16T10:55:16.565+01:00  INFO 16976 --- [broker] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-06-16T10:55:16.572+01:00  INFO 16976 --- [broker] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-06-16T10:55:16.585+01:00  INFO 16976 --- [broker] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-16T11:39:46.120+01:00  INFO 33520 --- [broker] [main] a.a.AlgorithmEngineApplicationTests      : Starting AlgorithmEngineApplicationTests using Java 21.0.2 with PID 33520 (started by Paulo João in C:\Users\Paulo João\Documents\projetos\algorithm-engine)
+2026-06-16T11:39:46.125+01:00  INFO 33520 --- [broker] [main] a.a.AlgorithmEngineApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2026-06-16T11:39:46.977+01:00  INFO 33520 --- [broker] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-16T11:39:47.047+01:00  INFO 33520 --- [broker] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 4 JPA repository interfaces.
+2026-06-16T11:39:47.835+01:00  INFO 33520 --- [broker] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-16T11:39:47.977+01:00  INFO 33520 --- [broker] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-16T11:39:48.860+01:00  INFO 33520 --- [broker] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-16T11:39:48.910+01:00  INFO 33520 --- [broker] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-16T11:39:49.462+01:00  INFO 33520 --- [broker] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e23ba17
+2026-06-16T11:39:49.462+01:00  INFO 33520 --- [broker] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-16T11:39:49.593+01:00  INFO 33520 --- [broker] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/broker]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: broker/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-16T11:39:50.726+01:00  INFO 33520 --- [broker] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-16T11:39:50.811+01:00  INFO 33520 --- [broker] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-16T11:39:50.927+01:00  INFO 33520 --- [broker] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-16T11:39:51.593+01:00  WARN 33520 --- [broker] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-16T11:39:52.544+01:00  INFO 33520 --- [broker] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-06-16T11:39:52.546+01:00  INFO 33520 --- [broker] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@63c6579]]
+2026-06-16T11:39:52.549+01:00  INFO 33520 --- [broker] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-06-16T11:39:52.555+01:00  INFO 33520 --- [broker] [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2026-06-16T11:39:52.715+01:00  INFO 33520 --- [broker] [main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#4c140b12:0/SimpleConnection@4e4ee99 [delegate=amqp://guest@127.0.0.1:5672/, localPort=50631]
+2026-06-16T11:39:52.863+01:00  INFO 33520 --- [broker] [main] a.a.AlgorithmEngineApplicationTests      : Started AlgorithmEngineApplicationTests in 7.053 seconds (process running for 8.083)
+2026-06-16T11:39:53.838+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2026-06-16T11:39:53.841+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2026-06-16T11:39:53.841+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2026-06-16T11:39:53.844+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2026-06-16T11:39:53.860+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2026-06-16T11:39:53.860+01:00  INFO 33520 --- [broker] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-2] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2026-06-16T11:39:53.861+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2026-06-16T11:39:53.862+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@63c6579]]
+2026-06-16T11:39:53.862+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2026-06-16T11:39:53.870+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-16T11:39:53.874+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-16T11:39:53.885+01:00  INFO 33520 --- [broker] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
