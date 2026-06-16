@@ -21,6 +21,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+      - name: Debug Java & Maven
+        run: |
+            java -version
+            mvn -version
+      
 
       # 3. Cache do Maven (para acelerar builds)
       - name: Cache Maven packages
