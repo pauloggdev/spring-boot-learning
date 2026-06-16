@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Chat</title>
+
+    <style>
+        #notification {
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .blink {
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔔 NOTIFICAÇÃO -->
+    <div id="notification">
+        🔔
+        <span id="badge">0</span>
+    </div>
+
+    <br />
+
+    <input id="msg" placeholder="mensagem..." />
+    <button onclick="send()">Enviar</button>
+    <ul id="messages"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script>
+        let notificationCount = 0;
+        const badge = document.getElementById("badge");
+        const bell = document.getElementById("notification");
+
+        const client = new StompJs.Client({
+            webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
+            debug: (str) => console.log(str),
+            reconnectDelay: 5000
+        });
+
+        client.onConnect = function () {
+            console.log("CONNECTED");
+            notificationCount++;
+
+            client.subscribe("/topic/order/created", (message) => {
+                console.log("RECEBIDO:", JSON.parse(message.body));
+                alert("order created");
+            });
+
+            client.subscribe("/topic/messages", function (response) {
+                const msg = JSON.parse(response.body);
+
+                // adicionar mensagem
+                const li = document.createElement("li");
+                li.innerHTML = msg.sender + ": " + msg.content;
+                document.getElementById("messages").appendChild(li);
+
+                // 🔔 aumentar notificações
+                notificationCount++;
+                badge.style.display = "inline";
+                badge.innerText = notificationCount;
+
+                // efeito de alerta
+                bell.classList.add("blink");
+            });
+        };
+
+        client.activate();
+
+        function send() {
+            const message = {
+                sender: "Paulo",
+                content: document.getElementById("msg").value
+            };
+
+            client.publish({
+                destination: "/app/chat",
+                body: JSON.stringify(message)
+            });
+        }
+
+        // clicar no sino limpa notificações
+        bell.onclick = function () {
+            notificationCount = 0;
+            badge.style.display = "none";
+            bell.classList.remove("blink");
+        };
+    </script>
+
+</body>
+
+</html>

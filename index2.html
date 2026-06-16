@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Chat</title>
+
+    <style>
+        #notification {
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .blink {
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔔 NOTIFICAÇÃO -->
+    <div id="notification">
+        🔔
+        <span id="badge">0</span>
+    </div>
+
+    <br />
+
+    <input id="msg" placeholder="mensagem..." />
+    <button onclick="send()">Enviar</button>
+
+    <ul id="messages"></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+    <script>
+        let notificationCount = 0;
+
+        const socket = new SockJS("http://localhost:8080/ws");
+        const stompClient = Stomp.over(socket);
+
+        const badge = document.getElementById("badge");
+        const bell = document.getElementById("notification");
+
+        stompClient.connect({}, function () {
+            console.log("Conectado");
+
+            stompClient.subscribe("/topic/order/created", (message) => {
+               
+
+                // 🔔 aumentar notificações
+                notificationCount++;
+                badge.style.display = "inline";
+                badge.innerText = notificationCount;
+
+                // efeito de alerta
+                bell.classList.add("blink");
+            });
+
+            stompClient.subscribe("/topic/messages", function (response) {
+                const msg = JSON.parse(response.body);
+
+                // adicionar mensagem
+                const li = document.createElement("li");
+                li.innerHTML = msg.sender + ": " + msg.content;
+                document.getElementById("messages").appendChild(li);
+
+                // 🔔 aumentar notificações
+                notificationCount++;
+                badge.style.display = "inline";
+                badge.innerText = notificationCount;
+
+                // efeito de alerta
+                bell.classList.add("blink");
+            });
+        });
+
+        function send() {
+            const message = {
+                sender: "Paulo",
+                content: document.getElementById("msg").value
+            };
+
+            stompClient.send("/app/chat", {}, JSON.stringify(message));
+        }
+
+        // clicar no sino limpa notificações
+        bell.onclick = function () {
+            notificationCount = 0;
+            badge.style.display = "none";
+            bell.classList.remove("blink");
+        };
+    </script>
+
+</body>
+
+</html>
